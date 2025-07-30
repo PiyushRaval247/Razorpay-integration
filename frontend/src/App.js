@@ -36,7 +36,7 @@ function App() {
 
     try {
       // First, save student data to backend
-      const response = await axios.post('http://localhost:5000/api/students', formData);
+      const response = await axios.post('https://razorpay-integration-lghc.onrender.com/api/students', formData);
       setStudentId(response.data.studentId);
       setShowPayment(true);
     } catch (error) {
@@ -49,7 +49,7 @@ function App() {
 
   const handlePayment = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/create-order', {
+      const response = await axios.post('https://razorpay-integration-lghc.onrender.com/api/create-order', {
         studentId: studentId,
         amount: 50000 // 500 rupees in paise
       });
@@ -63,7 +63,7 @@ function App() {
         order_id: response.data.order_id,
         handler: async function (response) {
           try {
-            const verifyResponse = await axios.post('http://localhost:5000/api/verify-payment', {
+            const verifyResponse = await axios.post('https://razorpay-integration-lghc.onrender.com/api/verify-payment', {
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature: response.razorpay_signature,
